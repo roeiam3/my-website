@@ -1,6 +1,4 @@
 
-layout: default
-title: Home
 ---
 
 # Roei Amsalem
