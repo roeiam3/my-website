@@ -1,7 +1,4 @@
-cd ~/my-website
 
-cat > index.md << 'EOF'
----
 layout: default
 title: Home
 ---
