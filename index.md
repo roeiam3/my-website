@@ -3,16 +3,23 @@ layout: default
 title: Home
 ---
 
-# Welcome
+# Building Reliable Networks
 
-Currently deep-diving into the next layer of networking. If it involves packets, protocols, or complex topologies, I'm on it. Always learning, always labbing.
+<p class="lead">I design, test, and troubleshoot enterprise network environments with a practical, lab-first workflow.</p>
 
-## About Me
+## Focus Areas
 
-I specialize in network engineering with a focus on understanding how data moves across complex infrastructures. My work involves designing, troubleshooting, and optimizing network systems.
+- Enterprise routing and switching
+- Layer 2/Layer 3 troubleshooting and root-cause analysis
+- Network documentation and operational standards
+- Continuous hands-on learning through homelab scenarios
 
-When I'm not configuring routers or analyzing packet captures, I'm building my homelab and exploring new networking technologies.
+## What You Will Find Here
+
+- **Projects**: real lab exercises, topology builds, and implementation notes
+- **Blog**: practical learning logs and technical writeups
+- **Progress updates**: what I am studying now and what I am shipping next
 
 ---
 
-_Last updated: February 2026_
+<p class="meta">Last updated: February 14, 2026</p>

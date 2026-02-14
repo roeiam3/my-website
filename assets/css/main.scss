@@ -1,4 +1,246 @@
 ---
 ---
 
-@import "base";
+:root {
+  --bg: #0b1220;
+  --bg-elevated: #121c2f;
+  --border: #223352;
+  --text-main: #d6e2f4;
+  --text-muted: #94a6c7;
+  --text-strong: #f4f8ff;
+  --accent: #63c5ff;
+  --accent-soft: #1b273e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background:
+    radial-gradient(circle at 0% -10%, rgba(99, 197, 255, 0.12), transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba(109, 132, 255, 0.09), transparent 35%),
+    var(--bg);
+  color: var(--text-main);
+  font-family: "IBM Plex Sans", "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, rgba(18, 28, 47, 0.95), rgba(14, 22, 37, 0.95));
+  border-right: 1px solid var(--border);
+  padding: 3rem 2rem;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  backdrop-filter: blur(8px);
+}
+
+.sidebar h1 {
+  color: var(--text-strong);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.sidebar .tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav li {
+  margin-bottom: 0.6rem;
+}
+
+.sidebar nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: block;
+  padding: 0.45rem 0;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.sidebar .social-links {
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar .social-links a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 0.6rem;
+  transition: color 0.2s ease;
+}
+
+.sidebar .social-links a:hover {
+  color: var(--accent);
+}
+
+.content {
+  flex: 1;
+  margin-left: 280px;
+  padding: 4rem 4rem 4rem 5rem;
+  max-width: 960px;
+}
+
+h1 {
+  color: var(--text-strong);
+  font-size: 2.6rem;
+  font-weight: 650;
+  line-height: 1.2;
+  margin-bottom: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  color: var(--text-strong);
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.95rem;
+}
+
+h3 {
+  color: var(--text-strong);
+  font-size: 1.2rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+p,
+li {
+  color: var(--text-main);
+  font-size: 1.05rem;
+}
+
+p {
+  margin-bottom: 1.1rem;
+}
+
+ul,
+ol {
+  padding-left: 1.3rem;
+  margin-bottom: 1.1rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #89d7ff;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.4rem 0;
+}
+
+.lead {
+  color: var(--text-muted);
+  font-size: 1.12rem;
+}
+
+.card-list {
+  margin-top: 1.4rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.card-link {
+  display: block;
+  background: linear-gradient(160deg, rgba(99, 197, 255, 0.07), rgba(24, 38, 62, 0.65));
+  border: 1px solid var(--border);
+  padding: 1.1rem 1rem;
+  border-radius: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-link:hover {
+  transform: translateY(-2px);
+  border-color: #35517e;
+}
+
+.card-link h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card-link p {
+  margin: 0 0 0.4rem;
+  color: var(--text-muted);
+}
+
+.card-link time {
+  color: #7eb5ff;
+  font-size: 0.95rem;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 245px;
+  }
+
+  .content {
+    margin-left: 245px;
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 1.4rem;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 2rem 1.4rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}

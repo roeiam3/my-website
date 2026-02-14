@@ -1,5 +1,18 @@
 title: Roei Amsalem
-description: Personal website and portfolio
+description: Network Engineer focused on enterprise infrastructure, troubleshooting, and practical lab-driven learning.
 url: "https://roeiam.online"
+baseurl: ""
+timezone: "Asia/Jerusalem"
+
+author:
+  name: Roei Amsalem
+  email: roeiam3@gmail.com
+  linkedin: roeiamsalem
+  github: roeiam3
 
 markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

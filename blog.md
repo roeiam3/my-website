@@ -5,13 +5,18 @@ title: Blog
 
 # Blog
 
-Technical writeups, tutorials, and thoughts on networking.
+Technical writeups, tutorials, and study logs on enterprise networking.
 
-<div style="margin-top:1rem;">
-<a href="/ccnp-journey.html" style="display:block;border:1px solid #ddd;padding:16px;border-radius:6px;text-decoration:none;color:inherit;max-width:720px;">
-	<h2 style="margin:0 0 8px;">CCNP Journey</h2>
-	<p style="margin:0 0 8px;">A short introduction to my CCNP study path and resources.</p>
-	<small style="color:#666;">2026-02-14</small>
-</a>
+{% if site.posts.size > 0 %}
+<div class="card-list">
+  {% for post in site.posts %}
+  <a class="card-link" href="{{ post.url | relative_url }}">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.excerpt | strip_html | truncate: 140 }}</p>
+    <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+  </a>
+  {% endfor %}
 </div>
-
+{% else %}
+<p>No posts yet. New writeups will appear here soon.</p>
+{% endif %}

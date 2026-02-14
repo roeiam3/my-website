@@ -5,6 +5,6 @@ title: CCNP Journey
 
 # CCNP Journey
 
-**Date:** 2026-02-14
+This topic has moved to the blog post format for better organization and RSS updates.
 
-Welcome to my CCNP Journey — this page will contain study notes, resources, and reflections as I work through the CCNP curriculum. I'll populate the full entry content next.
+Read the latest entry in the [Blog]({{ '/blog/' | relative_url }}).
