@@ -7,13 +7,7 @@ title: Projects
 
 Selected networking projects, lab setups, and technical experiments.
 
-<div class="card-list">
-  <a class="card-link" href="{{ '/blog/' | relative_url }}">
-    <h2>CCNP Enterprise Lab Track</h2>
-    <p>Structured hands-on lab path covering routing, switching, and troubleshooting scenarios.</p>
-    <time>Active</time>
-  </a>
-</div>
+Project-specific writeups and implementation notes will be published here.
 
 ## Planned Additions
 
