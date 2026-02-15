@@ -5,14 +5,8 @@ title: Home
 
 # Building Reliable Networks
 
-<p class="lead">I design, test, and troubleshoot enterprise network environments with a practical, lab-first workflow.</p>
+<p class="lead">I design, test, and troubleshoot enterprise networks with a passion for technology.</p>
 
-## Focus Areas
-
-- Enterprise routing and switching
-- Layer 2/Layer 3 troubleshooting and root-cause analysis
-- Network documentation and operational standards
-- Continuous hands-on learning through homelab scenarios
 
 ## What You Will Find Here
 
