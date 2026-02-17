@@ -27,6 +27,10 @@
         <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:{{ site.author.email }}">Email</a>
       </div>
+
+      {% if page.project == 'learning-automation' %}
+        {% include learning-automation-sidebar-nav.html %}
+      {% endif %}
     </aside>
 
     <main class="content">

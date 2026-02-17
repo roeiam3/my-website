@@ -133,6 +133,19 @@ h3 {
   margin-bottom: 0.7rem;
 }
 
+.heading-underline {
+  display: inline-block;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.08rem;
+}
+
+.component-label {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.14em;
+}
+
 p,
 li {
   color: var(--text-main);
@@ -208,6 +221,45 @@ hr {
 .meta {
   color: var(--text-muted);
   font-size: 0.98rem;
+}
+
+.sidebar-project-nav {
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.sidebar-project-title {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.55rem;
+}
+
+.sidebar-project-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-project-nav li {
+  margin-bottom: 0.35rem;
+}
+
+.sidebar-project-nav a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.3rem 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-project-nav a:hover,
+.sidebar-project-nav a.active {
+  color: var(--accent);
+  transform: translateX(2px);
 }
 
 @media (max-width: 1024px) {
