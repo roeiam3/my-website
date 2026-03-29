@@ -17,6 +17,14 @@ The goal was to build a practical tool that a small infrastructure team could de
 
 - **Source code:** [github.com/roeiam3/DCDB](https://github.com/roeiam3/DCDB)
 
+### Built with AI
+
+This project was built heavily with the help of AI. I used AI assistants throughout the entire development process — from initial design decisions and architecture planning through to writing code, debugging, and iterating on features. The result is a working tool that solves a real problem for my team, and AI made it possible to get there much faster than I could have on my own.
+
+### Your Mileage May Vary
+
+DCDB is open source and MIT-licensed — anyone is free to use it, fork it, and alter it to fit their needs. That said, the app in its current form is primarily built around what my team and I need day to day. It reflects our workflow, our device categories, and our site structure. It may not perfectly match yours out of the box, but the codebase is straightforward enough to adapt.
+
 ---
 
 ## Key Features
