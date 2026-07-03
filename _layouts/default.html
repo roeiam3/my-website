@@ -29,7 +29,7 @@
         <ul>
           <li><a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
           <li><a href="{{ '/projects/' | relative_url }}" class="{% if page.url == '/projects/' %}active{% endif %}">Projects</a></li>
-          <li><a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' %}active{% endif %}">Blog</a></li>
+          <li><a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' or page.project == 'datapath-visualized' %}active{% endif %}">Blog</a></li>
         </ul>
       </nav>
 
@@ -41,6 +41,10 @@
 
       {% if page.project == 'learning-automation' %}
         {% include learning-automation-sidebar-nav.html %}
+      {% endif %}
+
+      {% if page.project == 'datapath-visualized' %}
+        {% include datapath-visualized-sidebar-nav.html %}
       {% endif %}
     </aside>
 

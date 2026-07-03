@@ -7,6 +7,14 @@ title: Blog
 
 Technical writeups, tutorials, and study logs on enterprise networking.
 
+<div class="card-list">
+  <a class="card-link" href="{{ '/blog/datapath-visualized/' | relative_url }}">
+    <h2>Datapath Visualized</h2>
+    <p>Visual walkthroughs of how traffic moves through network devices — ingress, lookup, rewrite, and egress.</p>
+    <time>2026-07-03</time>
+  </a>
+</div>
+
 {% if site.posts.size > 0 %}
 <div class="card-list">
   {% for post in site.posts %}
