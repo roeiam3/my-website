@@ -232,6 +232,40 @@ hr {
   border: 1px solid var(--border);
 }
 
+.media-row {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin: 1.5rem 0;
+}
+
+.media-row__text {
+  flex: 1 1 0;
+}
+
+.media-row__text p {
+  margin-bottom: 0;
+}
+
+.media-row__img {
+  flex: 0 0 auto;
+  width: 280px;
+  max-width: 45%;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .media-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .media-row__img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 .content table {
   width: 100%;
   border-collapse: collapse;

@@ -47,7 +47,7 @@ Almost all cables regardless of their mode are built similarly: a core comprised
 
 Before examining the types, let's go through some worthy-to-know attributes and their meaning to fully comprehend the cable's characteristics.
 
-- **Smearing** — Smearing is the result of a principle in optical fibers called [modal dispersion](https://www.sciencedirect.com/topics/materials-science/modal-dispersion#definition) and is only relevant for multi-mode cables. Light is sent in at different angles and travels along multiple paths (modes) of differing lengths, so parts of the same pulse arrive at slightly different times. This results in a distorted or sometimes unreadable pulse (data loss).
+- **Smearing** — Smearing is the result of a principle in optical fibers called [modal dispersion](https://en.wikipedia.org/wiki/Modal_dispersion) and is only relevant for multi-mode cables. Light is sent in at different angles and travels along multiple paths (modes) of differing lengths, so parts of the same pulse arrive at slightly different times. This results in a distorted or sometimes unreadable pulse (data loss).
 
 ### Single-mode
 
@@ -138,3 +138,28 @@ A general rule of thumb is that the optical per-lane rate loosely indicates the 
 ![NRZ vs PAM4 voltage levels and thresholds between laser and photodiode]({{ '/assets/images/datapath-visualized/nrz-vs-pam4.png' | relative_url }})
 
 <p class="meta"><em>The following illustration aims to represent how NRZ and PAM4 agree, then forward a single beam of light in their given time-slot — the volt at which it is sent, and the volt at which it is perceived. The illustration does not include, but worth remembering, that attenuation needs to be accounted for by the laser to ensure it sends the pulse bright enough to fit the right threshold on the photodiode.</em></p>
+
+<br>
+
+## Wavelengths and Bands
+
+As Wikipedia states, "a wave is a propagating dynamic disturbance (change from equilibrium) of one or more quantities." Very loosely (and loosely matters here), a wave can be viewed as a cycle that moves through space, and as it moves, it interacts with and is affected by its surroundings. An easy way to picture it is throwing a stone into a lake: in the splash area, waves are generated from the energy of the impact of the rock hitting the surface of the water, and those waves then propagate outward. The impact generates energy, the energy needs somewhere to go, and the waves are what moves it.
+
+<div class="media-row">
+  <div class="media-row__text">
+    <p>A wavelength is measured between two adjacent points in the same phase on the wave. The lambda (λ) marks the wavelength; in such an example, it doesn't matter which λ is picked — since the two points are in the same phase, the wavelength would always be the same.</p>
+  </div>
+  <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/wavelength.png' | relative_url }}" alt="A sine wave on X/Y axes with the wavelength measured between two points in the same phase">
+</div>
+
+
+### Bands
+
+A band is a range of waves that share similar attributes. Each band has its own unique set of attributes and is used differently even when the underlying hardware (optical cabling) remains the same.
+
+The reason bands even exist is to differentiate due to their attributes: as you move across the wavelength axis, so does the increase or decrease of the power of some attributes. There are two main attributes worth bringing up, and they were mentioned earlier as well.
+
+- **Attenuation** — the loss of power over distance (via absorption or scattering)
+- **Chromatic dispersion** — how much a pulse smears before pulses are indistinguishable to the photodiode from the original pulse
+
+![Optical wavelength bands from 850 nm multimode through O, E, S, C, and L bands]({{ '/assets/images/datapath-visualized/optical-wavelength-bands.png' | relative_url }})
