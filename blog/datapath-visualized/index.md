@@ -9,19 +9,6 @@ project: datapath-visualized
 
 <p class="meta">Started: 2026-07-03</p>
 
-Visual walkthroughs of how traffic moves through network devices — from ingress to forwarding decision to egress.
+As I progress more into networking, more and more information relies on understanding the fundamentals flawlessly — like a tower being built, shaky fundamentals would topple it all. However, as I progress, the more some pieces of fundamentals seem less apparent and more abstract. Those abstract parts can lead to a less ideal understanding of a more complex topic, and these obscure, more niche parts are often more intriguing than most make them out to be.
 
-## What This Series Covers
-
-Each entry breaks a datapath into clear stages:
-
-1. **Ingress** — where packets arrive and how they are classified.
-2. **Lookup** — routing, switching, ACL, and policy decisions.
-3. **Rewrite** — header changes, NAT, encapsulation, and QoS marking.
-4. **Egress** — queueing, scheduling, and transmission.
-
-## Why Visualize the Datapath
-
-Understanding *what* a device does is useful. Understanding *where* in the pipeline it happens makes troubleshooting and design much faster — especially when symptoms could come from ACL drops, routing lookups, or output queue congestion.
-
-More pages will be added here as the series grows.
+This writeup is my way of navigating these topics I would usually chalk up to abstract concepts and not dive as deep into as I usually would. By clearing them up more concretely, I hope to get a better grasp of networking as a whole.
