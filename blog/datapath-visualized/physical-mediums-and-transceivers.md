@@ -152,6 +152,25 @@ As Wikipedia states, "a wave is a propagating dynamic disturbance (change from e
   <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/wavelength.png' | relative_url }}" alt="A sine wave on X/Y axes with the wavelength measured between two points in the same phase">
 </div>
 
+### Refraction and dispersion
+
+Before moving further, it's worth mentioning two additional important physics phenomena — refraction and dispersion — and what the refractive index is.
+
+<div class="media-row">
+  <div class="media-row__text">
+    <p><strong>Refractive index</strong> is a unitless number that measures how much a material slows down light compared to a vacuum. For example, air has a refractive index (denoted as N) of 1.0003 (almost no slowdown, hence no redirection), and water has N = 1.33 — that's why you can see the redirection of light when placing an item within water.</p>
+  </div>
+  <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/refractive-index.png' | relative_url }}" alt="A pencil appearing bent at the water line in a glass, illustrating refraction">
+</div>
+
+**Refraction** is the result of a light wave moving from one medium to another (air to water, for example). The redirection is caused by the change of speed that occurs when the light enters from either a higher or lower refractive index into the other medium; higher or lower indicates the direction.
+
+<div class="media-row">
+  <div class="media-row__text">
+    <p><strong>Dispersion</strong>, very loosely put, is how different wavelengths (or colors) bend by different amounts. For example, blue light (400–450nm) bends more than red light (650–700nm).</p>
+  </div>
+  <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/dispersion.png' | relative_url }}" alt="A prism splitting a white light beam into a spectrum of colors, illustrating dispersion">
+</div>
 
 ### Bands
 
@@ -163,3 +182,14 @@ The reason bands even exist is to differentiate due to their attributes: as you 
 - **Chromatic dispersion** — how much a pulse smears before pulses are indistinguishable to the photodiode from the original pulse
 
 ![Optical wavelength bands from 850 nm multimode through O, E, S, C, and L bands]({{ '/assets/images/datapath-visualized/optical-wavelength-bands.png' | relative_url }})
+
+Above you can see the different band groups, their attributes, and their usage. For example:
+
+- **O band** is notorious for its zero dispersion. As mentioned above, this means that light waves passing through it exhibit close to 0 bending.
+- **C band** is very useful for long-haul, because the light waves in the band showcase very low loss compared to other bands — where loss is how far a light can reach before its brightness decreases.
+
+An example to tie it all together (since it's worthwhile, and physics is unfortunately complicated):
+
+Assume you have two lasers firing from space — one firing the color red (wavelength at 800nm) and the other blue (wavelength at 650nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** As a result, both lasers slightly bend, but lo and behold, both lights bend differently: the red one at X angle and blue at Y. That's **dispersion!**
+
+Wavelengths & bands, dispersion, refraction, and the refractive index are all very relevant for the upcoming parts in this chapter, and in general are worth knowing.
