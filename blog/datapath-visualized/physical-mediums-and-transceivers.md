@@ -190,7 +190,7 @@ Above you can see the different band groups, their attributes, and their usage. 
 
 An example to tie it all together (since it's worthwhile, and physics is unfortunately complicated):
 
-Assume you have two lasers firing from space — one firing the color red (wavelength at 800nm) and the other blue (wavelength at 650nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** As a result, both lasers slightly bend, but lo and behold, both lights bend differently: the red one at X angle and blue at Y. That's **dispersion!**
+Assume you have two lasers firing from space — one firing the color red (wavelength at ~650nm) and the other blue (wavelength at ~450nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** As a result, both lasers slightly bend, but lo and behold, both lights bend differently: the red one at X angle and blue at Y. That's **dispersion!**
 
 Wavelengths & bands, dispersion, refraction, and the refractive index are all very relevant for the upcoming parts in this chapter, and in general are worth knowing.
 
