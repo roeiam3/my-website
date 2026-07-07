@@ -247,11 +247,26 @@ hr {
   margin-bottom: 0;
 }
 
+.media-row--top {
+  align-items: flex-start;
+}
+
 .media-row__img {
   flex: 0 0 auto;
   width: 280px;
   max-width: 45%;
   margin: 0;
+}
+
+.media-row__aside {
+  flex: 0 0 auto;
+  width: 360px;
+  max-width: 50%;
+}
+
+.media-row__aside table {
+  margin: 0;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -260,7 +275,8 @@ hr {
     align-items: flex-start;
   }
 
-  .media-row__img {
+  .media-row__img,
+  .media-row__aside {
     width: 100%;
     max-width: 100%;
   }

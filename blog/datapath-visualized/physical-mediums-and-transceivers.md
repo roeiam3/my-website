@@ -193,3 +193,105 @@ An example to tie it all together (since it's worthwhile, and physics is unfortu
 Assume you have two lasers firing from space — one firing the color red (wavelength at 800nm) and the other blue (wavelength at 650nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** As a result, both lasers slightly bend, but lo and behold, both lights bend differently: the red one at X angle and blue at Y. That's **dispersion!**
 
 Wavelengths & bands, dispersion, refraction, and the refractive index are all very relevant for the upcoming parts in this chapter, and in general are worth knowing.
+
+<br>
+
+## Connectors
+
+A brief look at the most common optical connectors.
+
+<div class="media-row">
+  <div class="media-row__text">
+    <p><strong>LC</strong> — the most widely used optical connector, and today the de-facto standard for transceiver optics. LC is a simplex (single-fiber) connector, but it's almost always deployed as a duplex pair: two LC connectors clipped together, one fiber for TX and one for RX. Its popularity comes from a small form factor and mechanical simplicity — there are no male/female variants. (It does still come in UPC and APC endface polishes, which must be matched to each other.)</p>
+  </div>
+  <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/lc-connector.png' | relative_url }}" alt="A blue LC duplex fiber optic connector with yellow single-mode cabling">
+</div>
+
+<div class="media-row">
+  <div class="media-row__text">
+    <p><strong>MPO</strong> — a multi-fiber connector that's grown popular in high-density environments like AI/HPC datacenters, and the main focus of this section. Where LC-to-LC is simple, MPO introduces real trade-offs.</p>
+  </div>
+  <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/mpo-connector.png' | relative_url }}" alt="A yellow and black MPO multi-fiber connector">
+</div>
+
+Importantly, MPO and LC aren't competitors — they target different use cases and neither replaces the other. And the connector itself isn't really the point: most of the practical differences come from the cable and transceiver side, covered in the following sections.
+
+### The Story of MPO
+
+MPO is an industry-standard connector (defined in IEC 61754-7), originally developed by the Japanese telecom company NTT to improve fiber density and ease of use. (You'll also see "MTP," which is US Conec's tighter-tolerance, trademarked take on the MPO.)
+
+Key differences from LC:
+
+- **Fiber count** — a single MPO carries many fibers in one ferrule. Common counts are 8, 12, 16, and 24, with high-density variants reaching 32 or even 72.
+- **Male vs female** — MPO comes in pinned (male, two guide pins) and unpinned (female, two guide holes) versions. A pinned connector always mates to an unpinned one, which enforces correct fiber alignment.
+- **UPC vs APC** — MPO endfaces can be flat (PC/UPC) or angled (APC). The angled finish reduces back-reflection (better return loss), which matters most on single-mode links.
+
+So why MPO over LC? Cost and density.
+
+As datacenter speeds climb, so does the cost of the optics — higher baud rates, PAM4 modulation, and precise, expensive lasers. Parallel optics sidesteps some of this: running, say, 8 lanes of 100G over one MPO lets each lane use slower, cheaper components, which can be substantially cheaper than pushing the same aggregate rate down a single fiber pair at a much higher per-lane speed.
+
+Then there's physical density. One MPO carries 8, 12, or more fibers in the footprint of a single connector, so in a patch panel a single MPO can replace many individual LC terminations — a large density gain for little added cost. In big HPC datacenters, where space, heat, and total equipment count are real constraints, that adds up fast.
+
+Other connectors exist (SC, ST, and more), but LC and MPO are the most prominent today, so they're the two covered here.
+
+Lastly, it's worth mentioning that MTP — the trademarked, tighter-tolerance take on the MPO (from US Conec) — has real benefits over a standard MPO, mostly mechanical advantages that improve longevity, ease of use, and alignment tolerances. At the time of writing, though, it's substantially pricier for a benefit that's negligible in most deployments.
+
+<br>
+
+## Transceiver Naming Convention
+
+This segment gives a brief overview of transceiver naming conventions: how to read them, what some of the popular suffixes and prefixes mean, and generally granting the reader an easier way of identifying all the relevant data it can grab from a single read of the transceiver's details.
+
+The tables here contain only IEEE-accepted fields, and avoid vendor-specific ones as they can be misleading and confusing.
+
+<div class="media-row media-row--top">
+  <div class="media-row__text">
+    <p>The table beside shows some range-based suffixes, plus a few examples of how to read a transceiver.</p>
+    <br><p><strong>Examples:</strong></p><br>
+    <ol>
+      <li><strong>QSFP 100G LR4</strong> — Long Reach, 4 lanes each at 25G (indicating single-mode)</li>
+      <li><strong>SFP+ 10G SR</strong> — Single lane, Short Reach (indicating multi-mode)</li>
+      <li><strong>OSFP 800G SR8</strong> — 8 lanes, Short Reach (indicating MPO Multimode)</li>
+    </ol>
+  </div>
+  <div class="media-row__aside" markdown="1">
+
+| Code | Meaning | Typical fiber / distance* |
+| --- | --- | --- |
+| SR | Short Reach | Multimode, ~100 m |
+| DR | (500 m) | Single-mode, ~500 m |
+| FR | Far Reach | Single-mode, ~2 km |
+| LR | Long Reach | Single-mode, ~10 km |
+| ER | Extended Reach | Single-mode, ~40 km |
+| ZR | (long haul) | Single-mode, ~80 km+ |
+
+  </div>
+</div>
+
+<br>
+
+## Wavelength Division Multiplexing
+
+CWDM (Coarse Wavelength Division Multiplexing) and DWDM (Dense Wavelength Division Multiplexing) are two similar technologies that increase bandwidth over a single fiber by multiplexing several wavelengths through the core simultaneously. Each has its own advantages and disadvantages, and this section explains how they work and where each is best used.
+
+It won't go deep into either one, but aims to provide a baseline for understanding and for applying that understanding to real-world uses.
+
+So far we've discussed wavelengths and modulation; WDM is where those two topics come together to deliver real, substantial bandwidth increases, often at lower cost.
+
+### CWDM
+
+CWDM operates across a wide wavelength range, 1270–1610nm, spanning from the O-band up to the L-band, with each channel separated by 20nm. That wide spacing is the whole point: it's loose enough that a laser's wavelength can drift with temperature without wandering into the neighboring channel, so CWDM can use uncooled lasers (no thermoelectric cooler). That dramatically lowers the cost and power of the optics, which is why CWDM is used primarily in low-cost, short-range applications.
+
+### DWDM
+
+DWDM operates in a much narrower range, 1530–1565nm, within the C-band. The reason is amplification: the EDFA (erbium-doped fiber amplifier) only has gain in that narrow window, so confining every channel to the C-band lets a single EDFA boost them all at once as pure light — the foundation of long-haul reach. That's possible because both the overall range is narrow and the spacing between channels is tight, just 0.8 or 0.4nm. The trade-off is cost: that tight spacing requires cooled, wavelength-locked lasers, and long distances require heavy FEC and DSP to overcome the noise (OSNR decay) and dispersion the signal accumulates along the way.
+
+Per-fiber capacity is the most meaningful way to compare the two. Over a single duplex LC pair, DWDM can theoretically reach tens of Tbit/s — on the order of 32 Tbit/s with modern coherent channels — while CWDM tops out far lower, in the hundreds of Gbit/s, provided you accept the extra cost of the required equipment such as the mux/demux.
+
+<br>
+
+## Conclusion
+
+This chapter has hopefully helped you grasp the differences between cables, which connector types exist and their advantages and disadvantages, the different types of transceivers, modulations, and multiplexing technologies — whilst also touching on some physics relating to waves and wavelengths, and phenomena such as chromatic dispersion, smearing, and loss: how they occur and how to mitigate them.
+
+The main takeaway from this chapter is that in the complex world of ours, there is no black and white, no "right" or "wrong" solution, no one better cable, no one better technology. Every piece here can, and should, be used correctly in the scenario you're in to best achieve the goal.
