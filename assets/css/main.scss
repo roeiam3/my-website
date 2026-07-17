@@ -2,6 +2,7 @@
 ---
 
 :root {
+  color-scheme: dark;
   --bg: #0b1220;
   --bg-elevated: #121c2f;
   --border: #223352;
@@ -10,6 +11,39 @@
   --text-strong: #f4f8ff;
   --accent: #63c5ff;
   --accent-soft: #1b273e;
+  --accent-hover: #89d7ff;
+  --link-meta: #7eb5ff;
+  --card-border-hover: #35517e;
+  --bg-glow-1: rgba(99, 197, 255, 0.12);
+  --bg-glow-2: rgba(109, 132, 255, 0.09);
+  --sidebar-top: rgba(18, 28, 47, 0.95);
+  --sidebar-bottom: rgba(14, 22, 37, 0.95);
+  --card-grad-1: rgba(99, 197, 255, 0.07);
+  --card-grad-2: rgba(24, 38, 62, 0.65);
+  --table-cell-bg: rgba(18, 28, 47, 0.45);
+}
+
+/* Future styles: use tokens above (add to both :root and [data-theme="light"]). Never hardcode theme colors. */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f0f4f9;
+  --bg-elevated: #ffffff;
+  --border: #c5d2e4;
+  --text-main: #2a3a52;
+  --text-muted: #5a6d88;
+  --text-strong: #0f1a2a;
+  --accent: #0077b6;
+  --accent-soft: #e3f0fa;
+  --accent-hover: #005f92;
+  --link-meta: #0069a8;
+  --card-border-hover: #8eb4d8;
+  --bg-glow-1: rgba(0, 119, 182, 0.08);
+  --bg-glow-2: rgba(80, 100, 180, 0.06);
+  --sidebar-top: rgba(255, 255, 255, 0.97);
+  --sidebar-bottom: rgba(236, 242, 250, 0.97);
+  --card-grad-1: rgba(0, 119, 182, 0.05);
+  --card-grad-2: rgba(255, 255, 255, 0.92);
+  --table-cell-bg: rgba(255, 255, 255, 0.75);
 }
 
 * {
@@ -20,8 +54,8 @@
 
 body {
   background:
-    radial-gradient(circle at 0% -10%, rgba(99, 197, 255, 0.12), transparent 45%),
-    radial-gradient(circle at 100% 0%, rgba(109, 132, 255, 0.09), transparent 35%),
+    radial-gradient(circle at 0% -10%, var(--bg-glow-1), transparent 45%),
+    radial-gradient(circle at 100% 0%, var(--bg-glow-2), transparent 35%),
     var(--bg);
   color: var(--text-main);
   font-family: "IBM Plex Sans", "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
@@ -37,13 +71,15 @@ body {
 
 .sidebar {
   width: 280px;
-  background: linear-gradient(180deg, rgba(18, 28, 47, 0.95), rgba(14, 22, 37, 0.95));
+  background: linear-gradient(180deg, var(--sidebar-top), var(--sidebar-bottom));
   border-right: 1px solid var(--border);
   padding: 3rem 2rem;
   position: fixed;
   height: 100vh;
   overflow-y: auto;
   backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h1 {
@@ -169,7 +205,7 @@ a {
 }
 
 a:hover {
-  color: #89d7ff;
+  color: var(--accent-hover);
 }
 
 hr {
@@ -191,7 +227,7 @@ hr {
 
 .card-link {
   display: block;
-  background: linear-gradient(160deg, rgba(99, 197, 255, 0.07), rgba(24, 38, 62, 0.65));
+  background: linear-gradient(160deg, var(--card-grad-1), var(--card-grad-2));
   border: 1px solid var(--border);
   padding: 1.1rem 1rem;
   border-radius: 12px;
@@ -200,7 +236,7 @@ hr {
 
 .card-link:hover {
   transform: translateY(-2px);
-  border-color: #35517e;
+  border-color: var(--card-border-hover);
 }
 
 .card-link h2 {
@@ -214,7 +250,7 @@ hr {
 }
 
 .card-link time {
-  color: #7eb5ff;
+  color: var(--link-meta);
   font-size: 0.95rem;
 }
 
@@ -256,6 +292,22 @@ hr {
   width: 280px;
   max-width: 45%;
   margin: 0;
+}
+
+.media-row__img--sm {
+  width: 140px;
+  max-width: 30%;
+}
+
+.pipeline-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem auto 0.75rem;
+}
+
+.pipeline-diagram .row-label {
+  fill: var(--text-muted);
 }
 
 .media-row__aside {
@@ -584,7 +636,7 @@ hr {
 }
 
 .content td {
-  background: rgba(18, 28, 47, 0.45);
+  background: var(--table-cell-bg);
 }
 
 .content-section-nav {
@@ -692,6 +744,48 @@ hr {
 .sidebar-project-nav a.active {
   color: var(--accent);
   transform: translateX(2px);
+}
+
+.theme-toggle {
+  margin-top: auto;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
+.theme-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.35rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle__btn:hover,
+.theme-toggle__btn:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.theme-toggle__icon {
+  display: block;
+}
+
+.theme-toggle__icon--moon {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle__icon--sun {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle__icon--moon {
+  display: block;
 }
 
 @media (max-width: 1024px) {

@@ -1,0 +1,71 @@
+<svg class="pipeline-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" role="img" aria-label="Generic ASIC ingress and egress forwarding pipeline">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <text class="row-label" x="20" y="55" font-family="system-ui,Segoe UI,sans-serif" font-size="13" font-weight="600">Ingress</text>
+  <text class="row-label" x="20" y="185" font-family="system-ui,Segoe UI,sans-serif" font-size="13" font-weight="600">Egress</text>
+
+  <!-- Ingress row connectors -->
+  <line x1="190" y1="50" x2="210" y2="50" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="50" x2="360" y2="50" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="490" y1="50" x2="510" y2="50" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Wrap: ACL → Traffic Manager -->
+  <path d="M640 50 H670 V120 H130 V155" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Egress row connectors -->
+  <line x1="190" y1="180" x2="210" y2="180" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="180" x2="360" y2="180" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="490" y1="180" x2="510" y2="180" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- RX MAC / SerDes -->
+  <rect x="70" y="20" width="120" height="60" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+  <text x="130" y="44" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">RX MAC / SerDes</text>
+  <text x="130" y="62" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Bits to frame</text>
+
+  <!-- Parser -->
+  <rect x="220" y="20" width="120" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="280" y="44" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">Parser</text>
+  <text x="280" y="62" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">MACs, IP, MPLS</text>
+
+  <!-- L2 / L3 Lookup -->
+  <rect x="370" y="20" width="120" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="430" y="44" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">L2 / L3 Lookup</text>
+  <text x="430" y="62" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">MAC Table, FIB</text>
+
+  <!-- ACL & QoS -->
+  <rect x="520" y="20" width="120" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="580" y="44" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">ACL &amp; QoS</text>
+  <text x="580" y="62" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Filters, DSCP/CoS</text>
+
+  <!-- Traffic Manager -->
+  <rect x="70" y="150" width="120" height="60" rx="8" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+  <text x="130" y="174" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">Traffic Manager</text>
+  <text x="130" y="192" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Queues &amp; Buffers</text>
+
+  <!-- Egress Rewrite -->
+  <rect x="220" y="150" width="120" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="280" y="174" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">Egress Rewrite</text>
+  <text x="280" y="192" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">TTL, MACs, Labels</text>
+
+  <!-- Egress ACL -->
+  <rect x="370" y="150" width="120" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+  <text x="430" y="174" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">Egress ACL</text>
+  <text x="430" y="192" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Final Filters</text>
+
+  <!-- TX MAC / SerDes -->
+  <rect x="520" y="150" width="120" height="60" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+  <text x="580" y="174" text-anchor="middle" fill="#333" font-family="system-ui,Segoe UI,sans-serif" font-size="12" font-weight="600">TX MAC / SerDes</text>
+  <text x="580" y="192" text-anchor="middle" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Frame to Bits</text>
+
+  <!-- Legend -->
+  <rect x="70" y="230" width="12" height="12" rx="2" fill="#d5e8d4" stroke="#82b366"/>
+  <text x="88" y="240" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">pipeline stages</text>
+  <rect x="200" y="230" width="12" height="12" rx="2" fill="#ffe6cc" stroke="#d79b00"/>
+  <text x="218" y="240" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">queueing</text>
+  <rect x="290" y="230" width="12" height="12" rx="2" fill="#e1d5e7" stroke="#9673a6"/>
+  <text x="308" y="240" fill="#555" font-family="system-ui,Segoe UI,sans-serif" font-size="11">physical I/O</text>
+</svg>
