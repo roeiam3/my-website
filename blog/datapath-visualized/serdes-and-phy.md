@@ -49,11 +49,11 @@ PHY (Physical) is a set of components that take hardware 1s and 0s and make them
 
 <div class="media-row media-row--top">
   <div class="media-row__text">
-    <p>Looking top-down — generating a frame and sending it — <strong>PCS</strong> is the first sub-layer of PHY. PCS handles FEC when data is received, plus encoding and scrambling (important topics, but not ones we'll dig into here).</p>
+    <p>Looking top-down — generating a frame and sending it — <strong>PCS</strong> is the first sub-layer of PHY. PCS handles encoding and scrambling, adds FEC parity on transmit, and decodes and corrects FEC on receive (important topics, but not ones we'll dig into here).</p>
     <br>
     <p>The next sub-layer is <strong>PMA</strong>. This is where the SerDes lives, along with CDR and related functions. Specifically here, data converts from the parallel wide bus to the serial single bus.</p>
     <br>
-    <p><strong>PMD</strong> is the last sub-layer — essentially the hardware itself, derived from what's actually implemented. For optical, that might be a laser; for DACs, copper wiring; and so on.</p>
+    <p><strong>PMD</strong> is the last sub-layer — the medium-facing hardware defined by the implementation. For optical, that includes the optical transmitter/receiver; for DACs, the electrical medium interface; and so on. A retimed optical module can also contain its own SerDes, CDR, and DSP in addition to the host-side PMA.</p>
     <br>
     <p>These three layers together take a frame and enable actual on-wire communication.</p>
   </div>

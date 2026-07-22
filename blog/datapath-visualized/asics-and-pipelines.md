@@ -71,7 +71,7 @@ The Biggest "Merchant Sillicon", Broadcom has many different segments they opera
 <div class="media-row">
   <div class="media-row__text">
     <ul>
-      <li><strong>BCM99450 — Jericho 4</strong> — 51.2Tb/s throughput per device, router-class ASIC. Its defining trait is deep buffering: attached HBM memory provides up to 160x more packet buffering than on-chip memory, enabling zero-loss behavior under heavy congestion. Supports the features ISPs and carriers depend on — MPLS, Segment Routing, OAM, hierarchical QoS, line-rate MACsec — and pairs with Ramon 4 fabric elements to scale into massive chassis and distributed routing systems.</li>
+      <li><strong>BCM99450 — Jericho 4</strong> — 51.2Tb/s throughput per device, router-class ASIC. Its defining trait is deep buffering: attached HBM memory provides up to 160x more packet buffering than on-chip memory, helping absorb large congestion bursts and reduce packet loss. Supports the features ISPs and carriers depend on — MPLS, Segment Routing, OAM, hierarchical QoS, line-rate MACsec — and pairs with Ramon 4 fabric elements to scale into massive chassis and distributed routing systems.</li>
     </ul>
   </div>
 

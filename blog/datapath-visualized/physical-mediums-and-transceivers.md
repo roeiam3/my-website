@@ -19,7 +19,7 @@ By examining the situation more broadly and applying those advantages and disadv
 | --- | --- | --- |
 | **Cost** | Overall cheaper full ownership | More expensive; requires pricier equipment, SFPs, Testing Equipment etc.|
 | **Distance** | Shorter runs | Further lengths |
-| **Bandwidth** | Lower speeds | Higher speeds |
+| **Bandwidth** | Competitive at short reach; practical ceilings fall sooner as distance grows | Higher practical speeds over longer distances |
 | **Ease of use** | Widespread and easy to get | More specialized tooling and handling |
 | **Availability** | Common and easy to source | Widely available; faster-evolving ecosystem|
 | **Durability** | Less Fragile, more rugged and tolerant to rough handling | More fragile (bend radius and dirt); more malleable in racks |
@@ -250,7 +250,7 @@ The tables here contain only IEEE-accepted fields, and avoid vendor-specific one
     <p>The table beside shows some range-based suffixes, plus a few examples of how to read a transceiver.</p>
     <br><p><strong>Examples:</strong></p><br>
     <ol>
-      <li><strong>QSFP 100G LR4</strong> — Long Reach, 4 lanes each at 25G (indicating single-mode)</li>
+      <li><strong>QSFP 100G LR4</strong> — Long Reach, 4 optical wavelengths at ~25G each over single-mode fiber</li>
       <li><strong>SFP+ 10G SR</strong> — Single lane, Short Reach (indicating multi-mode)</li>
       <li><strong>OSFP 800G SR8</strong> — 8 lanes, Short Reach (indicating MPO Multimode)</li>
     </ol>
