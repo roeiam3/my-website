@@ -7,7 +7,7 @@ project: datapath-visualized
 
 # Chassis Fabric Architectures
 
-A network fabric is a private, lossless mesh — internal or external — that interconnects all the forwarding ASICs in a system, so traffic can move between any ingress and any egress at full rate. The fabric is not a routed hop: the entire system remains one logical device from the network's point of view.
+A network fabric is a private mesh — internal or external — that interconnects all the forwarding ASICs in a system, so traffic can move between any ingress and any egress. Credit-based designs aim to keep transport through the fabric itself lossless, although packets can still be dropped at queues under sustained overload. The fabric is not a routed hop: the entire system remains one logical device from the network's point of view.
 
 An **internal fabric** is the traditional, monolithic design: the fabric lives inside the chassis (fabric cards on a backplane) and interconnects the line cards and their ASICs.
 

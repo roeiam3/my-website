@@ -23,7 +23,7 @@ The packet moves down the stack, and a Layer 2 frame is built around it: Source 
 
 ## Router A — Injection and the PHY
 
-The RP doesn't transmit the frame itself. It punts the frame over an internal high-speed serial link (typically PCIe) down to the forwarding ASIC on the line card — a SerDes on each end handles the serialization and deserialization across that link.
+The RP doesn't transmit the frame itself. It **injects** the frame toward the forwarding ASIC over an internal connection — PCIe on some platforms, and a proprietary interconnect on others. Where that connection is serial, a SerDes at each end handles serialization and deserialization.
 
 The ASIC performs a lookup, determines the egress port, and hands the frame to that port's PHY chain, which lives at the port itself (inside the ASIC or a dedicated PHY/gearbox):
 

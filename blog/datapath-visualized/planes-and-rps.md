@@ -23,7 +23,7 @@ The management plane is traffic to and from the operator, *about* the device rat
 
 ## Route Processor
 
-The Route Processor (RP) is the device's brain and is responsible for the control plane. The RP generates the OSPF messages, establishes neighbor relationships, computes best paths, sends the BPDUs, and handles any task that is complex or non-deterministic. It is usually a general-purpose multi-core CPU that sits *beside* the forwarding ASICs — logically and often physically separate from them.
+The Route Processor (RP) is the device's brain and is responsible for the control plane. The RP generates protocol traffic such as OSPF hellos and LSAs or STP BPDUs, establishes neighbor relationships, computes best paths, and handles tasks that are complex or non-deterministic. It is usually a general-purpose multi-core CPU that sits *beside* the forwarding ASICs — logically and often physically separate from them.
 
 The RP and the ASIC talk in both directions:
 
@@ -33,6 +33,6 @@ The RP and the ASIC talk in both directions:
 
 The RP also *injects* packets in the other direction — the OSPF hellos and ping replies it generates are pushed down through the ASIC and out an interface, taking a special path through the same silicon that does forwarding.
 
-Anything simple and deterministic is done directly on the ASIC (hardware switching); anything that requires actual thinking is done on the RP (software switching). That boundary — and the punt/inject paths across it — is the entire relationship between the planes and the hardware.
+Common, deterministic forwarding work is done directly on the ASIC (hardware switching); protocol state and exception processing are handled by the RP in software. That boundary — and the punt/inject paths across it — is the entire relationship between the planes and the hardware.
 
 It's important to remember that the planes are abstractions: they describe roles and responsibilities, not hard boundaries. As with any abstraction, real systems can blur the lines. The classification exists to support reasoning, not to draw walls. SSH traffic, for instance, belongs to the management plane, yet it terminates on and is processed by the RP — the same component that embodies the control plane.

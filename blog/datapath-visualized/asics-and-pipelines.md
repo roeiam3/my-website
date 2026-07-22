@@ -71,7 +71,7 @@ The Biggest "Merchant Sillicon", Broadcom has many different segments they opera
 <div class="media-row">
   <div class="media-row__text">
     <ul>
-      <li><strong>BCM99450 — Jericho 4</strong> — 51.2Tb/s throughput per device, router-class ASIC. Its defining trait is deep buffering: attached HBM memory provides up to 160x more packet buffering than on-chip memory, enabling zero-loss behavior under heavy congestion. Supports the features ISPs and carriers depend on — MPLS, Segment Routing, OAM, hierarchical QoS, line-rate MACsec — and pairs with Ramon 4 fabric elements to scale into massive chassis and distributed routing systems.</li>
+      <li><strong>BCM99450 — Jericho 4</strong> — 51.2Tb/s throughput per device, router-class ASIC. Its defining trait is deep buffering: attached HBM memory provides up to 160x more packet buffering than on-chip memory, helping absorb large congestion bursts and reduce packet loss. Supports the features ISPs and carriers depend on — MPLS, Segment Routing, OAM, hierarchical QoS, line-rate MACsec — and pairs with Ramon 4 fabric elements to scale into massive chassis and distributed routing systems.</li>
     </ul>
   </div>
 
@@ -115,15 +115,15 @@ Nowadays NVIDIA sells both: Spectrum for Ethernet and Quantum for InfiniBand. In
 
 The main reason for bringing up all these different vendors and device segments is to showcase the need for different hardware. Each segment (ISP, datacenter, campus, etc.) and even sub-segment has its own needs, therefore every ASIC is built differently — especially their pipelines.
 
-The pipeline itself is a hardware attribute of the ASIC. The easiest way to picture it is an assembly line: a series of physical stages, where each frame passes through every stage in order, one stage per clock tick. Each stage holds one frame at a time — but all stages work simultaneously, each on a different frame. While one frame is being looked up, the next is already being parsed, and another is being received.
+The pipeline itself is a hardware attribute of the ASIC. The easiest way to picture its common fast path is an assembly line: a series of physical stages that work simultaneously on different parts of different frames. While one frame is being looked up, the next is already being parsed, and another is being received.
 
-Frames don't wait on each other inside the pipe; everything advances in lockstep, which is exactly where the pipeline's determinism and line-rate throughput come from.
+Work advances predictably through that fast path, which is where the pipeline's line-rate throughput and low, bounded processing latency come from. Queues before or after the pipeline, recirculation, and exception paths can still add variable delay.
 
 **Determinism** — brought up a bunch of times but never elaborated for those who might not be familiar — is a description of a system, process, or mathematical model whose outcome is completely predictable and reproducible, and free of randomness.
 
-ASICs and pipelines being deterministic is crucial. knowing exactly how long a frame spends inside the ASIC gives you a fixed per-hop cost when reasoning about end-to-end latency.
+That predictability is crucial: knowing the baseline processing latency through the ASIC helps when reasoning about end-to-end latency, even though queueing can change the total per-hop delay.
 
-A pipeline in an ASIC is a deterministic sequence of actions that every frame goes through — fixed stages, fixed time per stage, same path for every frame.
+A pipeline in an ASIC is a hardware sequence of actions that frames take through the common forwarding path. The exact stages and any alternate or recirculation paths depend on the ASIC.
 
 To understand it better, let's imagine a basic ASIC pipeline at its purest form. Let's assume you want to do only the action of switching. You'd need the following:
 
