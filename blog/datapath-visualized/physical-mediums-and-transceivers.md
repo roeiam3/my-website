@@ -26,7 +26,7 @@ By examining the situation more broadly and applying those advantages and disadv
 | **Interference** | More prone to EM interference | No EM interference |
 | **Rack organization** | More rigid; at scale, more annoying to organize | Easier to organize in racks |
 | **Link utilization** | One signal per link | CWDM & DWDM allow more per-link utilization (many wavelengths on one link) |
-| **Heat** | Lower heat contribution | Generates substantially more heat |
+| **Heat** | Depends on the interface: passive copper runs cool, while active 10GBASE-T PHYs can be power-hungry | Pluggable optics add module heat; higher-rate and coherent optics can add substantially more |
 | **Repair & Installation** | field-terminable with basic tools, no splicing | Harder (splicing vs copper) |
 
 <br>
@@ -103,15 +103,16 @@ So `QSFP28` reads as *4 lanes × ~25G = 100G*, and `OSFP` (8 lanes) at 100G/lane
 | QSFP28 | 2014 | 4 | 25G | 100G | Also 2×50G variant, but 4×25G→100G dominates |
 | QSFP56 | 2019 | 4 | 50G | 200G | PAM4 |
 | QSFP112 | 2021 | 4 | 100G | 400G | Backwards compatible with QSFP56/QSFP28 |
-| QSFP-DD | — | 8 | 25G | 400G | Double-density (8 lanes) |
+| QSFP-DD | — | 8 | 50G | 400G | Double-density (8 lanes); PAM4 |
 | QSFP-DD800 | — | 8 | 100G | 800G | 800G evolution; competes with OSFP |
 
 ### OSFP family (8 lanes)
 
 | Form factor | Year (approx.) | Lanes | Per-lane | Total | Notes |
 | --- | --- | --- | --- | --- | --- |
-| OSFP | announced 2016; products ~2022 | 8 | 100G | 800G | Slightly larger than QSFP for more power/heat headroom; 60-pin host interface; QSFP backward-compat via adapter |
-| OSFP-XD | current frontier (as of 2026) | 8 | 200G | 1.6T | Extended-density evolution |
+| OSFP (400G) | products ~2019 | 8 | 50G | 400G | First generation; slightly larger than QSFP for more power/heat headroom |
+| OSFP (800G) | products ~2022 | 8 | 100G | 800G | 800G evolution; QSFP backward-compat via adapter where the host supports it |
+| OSFP-XD | current frontier (as of 2026) | 16 | 100G | 1.6T | Separate extended-density, 16-lane form factor |
 
 ### Backwards compatibility
 
@@ -137,7 +138,7 @@ A general rule of thumb is that the optical per-lane rate loosely indicates the 
 
 ![NRZ vs PAM4 voltage levels and thresholds between laser and photodiode]({{ '/assets/images/datapath-visualized/nrz-vs-pam4.png' | relative_url }})
 
-<p class="meta"><em>The following illustration aims to represent how NRZ and PAM4 agree, then forward a single beam of light in their given time-slot — the volt at which it is sent, and the volt at which it is perceived. The illustration does not include, but worth remembering, that attenuation needs to be accounted for by the laser to ensure it sends the pulse bright enough to fit the right threshold on the photodiode.</em></p>
+<p class="meta"><em>The following illustration aims to represent how NRZ and PAM4 agree, then forward a single beam of light in their given time-slot — the volt at which it is sent, and the volt at which it is perceived. The illustration does not include attenuation; in a real link, the optical link budget and receiver sensitivity must leave enough margin for each level to remain distinguishable.</em></p>
 
 <br>
 
@@ -167,7 +168,7 @@ Before moving further, it's worth mentioning two additional important physics ph
 
 <div class="media-row">
   <div class="media-row__text">
-    <p><strong>Dispersion</strong>, very loosely put, is how different wavelengths (or colors) bend by different amounts. For example, blue light (400–450nm) bends more than red light (650–700nm).</p>
+    <p>The prism illustrates <strong>angular dispersion</strong>: different wavelengths refract at different angles. In fiber communications, <strong>chromatic dispersion</strong> means something more specific — the wavelength components within a pulse travel at slightly different group velocities, so they arrive at different times and spread the pulse.</p>
   </div>
   <img class="media-row__img" src="{{ '/assets/images/datapath-visualized/dispersion.png' | relative_url }}" alt="A prism splitting a white light beam into a spectrum of colors, illustrating dispersion">
 </div>
@@ -185,12 +186,12 @@ The reason bands even exist is to differentiate due to their attributes: as you 
 
 Above you can see the different band groups, their attributes, and their usage. For example:
 
-- **O band** is notorious for its zero dispersion. As mentioned above, this means that light waves passing through it exhibit close to 0 bending.
+- **O band** is known for the near-zero chromatic-dispersion region of standard single-mode fiber. This means very little wavelength-dependent pulse spreading around 1310nm — not that the light exhibits no bending.
 - **C band** is very useful for long-haul, because the light waves in the band showcase very low loss compared to other bands — where loss is how far a light can reach before its brightness decreases.
 
 An example to tie it all together (since it's worthwhile, and physics is unfortunately complicated):
 
-Assume you have two lasers firing from space — one firing the color red (wavelength at ~650nm) and the other blue (wavelength at ~450nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** As a result, both lasers slightly bend, but lo and behold, both lights bend differently: the red one at X angle and blue at Y. That's **dispersion!**
+Assume you have two lasers firing from space — one firing the color red (wavelength at ~650nm) and the other blue (wavelength at ~450nm). When that light passes through the air, it goes through a refractive index that's very low, so no refraction really occurs to the visible eye. However, that laser then reaches water, and the refractive index of water is higher than that of air — the result is **refraction!** Both lasers bend, but by different angles: that's **angular dispersion**, the prism-style effect shown above. Inside a communications fiber, the chromatic-dispersion problem is instead that different wavelength components travel at slightly different speeds and spread a pulse over time.
 
 Wavelengths & bands, dispersion, refraction, and the refractive index are all very relevant for the upcoming parts in this chapter, and in general are worth knowing.
 
