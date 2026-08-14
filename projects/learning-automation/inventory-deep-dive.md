@@ -109,10 +109,17 @@ ai_servers:
 
 The last part of inventory work is verification, meaning you confirm it is functional, reachable, and variables are correct.
 
-```bash
-ansible-inventory -i inventory.ini --list
-ansible ai_servers -m ping -i inventory.ini
-```
+{% include cmd-card.html
+   variant="ops"
+   badge="list inventory"
+   cmd="ansible-inventory -i inventory.ini --list"
+   desc="Confirm groups, hosts, and vars as Ansible parsed them." %}
+
+{% include cmd-card.html
+   variant="ops"
+   badge="reachability"
+   cmd="ansible ai_servers -m ping -i inventory.ini"
+   desc="Swap ai_servers for another group, a host, or all." %}
 
 Where `ai_servers` can be replaced by another group, host, or `all`.
 

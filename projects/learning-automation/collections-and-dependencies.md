@@ -18,11 +18,11 @@ You cannot install a namespace by itself; you must install specific collections.
 
 For example:
 
-```bash
-ansible-galaxy collection install cisco.ios
-```
-
-<br>
+{% include cmd-card.html
+   variant="ops"
+   badge="galaxy"
+   cmd="ansible-galaxy collection install cisco.ios"
+   desc="Install one collection. You cannot install a namespace by itself." %}
 
 Or with `requirements.yml`:
 
@@ -34,11 +34,11 @@ collections:
   - name: cisco.nxos
 ```
 
-```bash
-ansible-galaxy collection install -r requirements.yml
-```
-
-<br>
+{% include cmd-card.html
+   variant="ops"
+   badge="galaxy"
+   cmd="ansible-galaxy collection install -r requirements.yml"
+   desc="Install everything the project declared. Preferred in real repos." %}
 
 Using `requirements.yml` is the recommended way in real projects because it documents exactly which collections your automation depends on and makes it easier to reproduce the environment.
 

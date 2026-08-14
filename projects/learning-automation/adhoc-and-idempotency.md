@@ -20,24 +20,26 @@ These commands are useful for:
 
 ## Example (From CLI)
 
-```bash
-ansible OSPFrouters -i inventory.ini -m cisco.ios.ios_banner -a "banner=motd text='test' state=present"
-```
-
-<br>
+{% capture cmd_banner %}ansible OSPFrouters -i inventory.ini -m cisco.ios.ios_banner -a "banner=motd text='test' state=present"{% endcapture %}
+{% include cmd-card.html
+   variant="ops"
+   badge="ad-hoc"
+   cmd=cmd_banner
+   desc="One-shot banner push to the OSPFrouters group. No playbook." %}
 
 Another quick operational example:
 
-```bash
-ansible routers -i inventory.ini -m cisco.ios.ios_command -a 'commands=["show clock"]'
-```
-
-<br>
+{% capture cmd_clock %}ansible routers -i inventory.ini -m cisco.ios.ios_command -a 'commands=["show clock"]'{% endcapture %}
+{% include cmd-card.html
+   variant="ops"
+   badge="ad-hoc"
+   cmd=cmd_clock
+   desc="Run a show command on every host in routers." %}
 
 ## Syntax Pattern
 
-```bash
-ansible <target> -i <inventory_file> -m <module> -a '<module_args>'
-```
-
-<br>
+{% include cmd-card.html
+   variant="ops"
+   badge="pattern"
+   cmd="ansible <target> -i <inventory_file> -m <module> -a '<module_args>'"
+   desc="Target, inventory, module, args. Same shape every time." %}

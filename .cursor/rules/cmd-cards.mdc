@@ -1,0 +1,39 @@
+---
+description: Standalone copyable commands use cmd-card include (cache / truth / ops).
+globs: "**/*.md"
+alwaysApply: false
+---
+
+# Command cards
+
+Standalone, one-line commands the reader is meant to copy go through `_includes/cmd-card.html`. Do not drop them in a fenced `bash` block.
+
+```liquid
+{% include cmd-card.html
+   variant="cache"
+   badge="users' view"
+   cmd="dig www.example.com"
+   desc="What do users currently see? Asks the configured resolver." %}
+```
+
+If `cmd` contains double quotes, `{% capture %}` the command first, then pass `cmd=the_capture`.
+
+## Variants
+
+| `variant` | Color | Use |
+|---|---|---|
+| `cache` | purple | resolver / cached view |
+| `truth` | teal | authoritative, `+norecurse`, `+trace` |
+| `ops` | gray | everything else (rndc, ansible, apt, galaxy) |
+
+Default is `cache` if omitted. Always set it explicitly.
+
+## Not a card
+
+- Inline `` `dig ...` `` inside a sentence
+- Multi-step recipes (venv install, heredocs, clone-then-compose)
+- Config / YAML / INI
+- Command output
+- Cheatsheets (the BIND command reference stays one fence)
+
+Wrong: wrapping `python3 -m venv && pip install` as four cards, or promoting "verifiable with `dig @auth +norecurse`" out of a paragraph.

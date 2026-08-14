@@ -45,9 +45,16 @@ ansible_become_password=<your_enable_password>
 
 ## Validate Inventory
 
-```bash
-ansible-inventory -i inventory.ini --list
-ansible routers -m ping -i inventory.ini
-```
+{% include cmd-card.html
+   variant="ops"
+   badge="list inventory"
+   cmd="ansible-inventory -i inventory.ini --list"
+   desc="Dump the inventory Ansible actually sees, including group vars." %}
+
+{% include cmd-card.html
+   variant="ops"
+   badge="reachability"
+   cmd="ansible routers -m ping -i inventory.ini"
+   desc="Confirm the routers group is reachable. Success is pong." %}
 
 If configured correctly, target devices should return `SUCCESS` with `pong`.
