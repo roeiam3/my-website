@@ -37,7 +37,7 @@
         <ul>
           <li><a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
           <li><a href="{{ '/projects/' | relative_url }}" class="{% if page.url == '/projects/' %}active{% endif %}">Projects</a></li>
-          <li><a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' or page.project == 'datapath-visualized' %}active{% endif %}">Blog</a></li>
+          <li><a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' or page.project == 'datapath-visualized' or page.project == 'dns-untangled' %}active{% endif %}">Blog</a></li>
         </ul>
       </nav>
 
@@ -53,6 +53,10 @@
 
       {% if page.project == 'datapath-visualized' %}
         {% include datapath-visualized-sidebar-nav.html %}
+      {% endif %}
+
+      {% if page.project == 'dns-untangled' %}
+        {% include dns-untangled-sidebar-nav.html %}
       {% endif %}
 
       <div class="theme-toggle">
@@ -80,7 +84,7 @@
     <main class="content">
       {{ content }}
 
-      {% if page.project == 'datapath-visualized' %}
+      {% if page.project == 'datapath-visualized' or page.project == 'dns-untangled' %}
         {% include section-nav.html %}
         <script src="{{ '/assets/js/section-nav.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
       {% endif %}

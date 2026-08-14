@@ -8,6 +8,11 @@ title: Blog
 Technical writeups, tutorials, and study logs on enterprise networking.
 
 <div class="card-list">
+  <a class="card-link" href="{{ '/blog/dns-untangled/' | relative_url }}">
+    <h2>DNS Untangled</h2>
+    <p>Unwinding how names become answers — from a query on the wire to the records that come back.</p>
+    <time>2026-08-14</time>
+  </a>
   <a class="card-link" href="{{ '/blog/datapath-visualized/' | relative_url }}">
     <h2>Datapath Visualized</h2>
     <p>Navigating the abstract fundamentals of networking and making them concrete.</p>

@@ -19,16 +19,19 @@ If that group does not exist in the command context, it returns nothing.
 
 Example:
 
-```bash
-ansible all -i inventory.ini -m cisco.ios.ios_command -a 'commands=["show ip int brief"]' --limit OSPFrouters
-```
-
-<br>
+{% capture cmd_limit_adhoc %}ansible all -i inventory.ini -m cisco.ios.ios_command -a 'commands=["show ip int brief"]' --limit OSPFrouters{% endcapture %}
+{% include cmd-card.html
+   variant="ops"
+   badge="limit"
+   cmd=cmd_limit_adhoc
+   desc="Target all, then keep only OSPFrouters. Unknown group = no hosts, empty run." %}
 
 You can apply the same idea to playbooks:
 
-```bash
-ansible-playbook -i inventory.ini site.yml --limit OSPFrouters
-```
+{% include cmd-card.html
+   variant="ops"
+   badge="limit"
+   cmd="ansible-playbook -i inventory.ini site.yml --limit OSPFrouters"
+   desc="Same filter on a playbook run." %}
 
 <hr>

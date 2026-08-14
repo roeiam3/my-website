@@ -21,6 +21,12 @@
   --card-grad-1: rgba(99, 197, 255, 0.07);
   --card-grad-2: rgba(24, 38, 62, 0.65);
   --table-cell-bg: rgba(18, 28, 47, 0.45);
+  --cmd-cache: #c4b5fd;
+  --cmd-cache-bg: rgba(167, 139, 250, 0.16);
+  --cmd-truth: #5eead4;
+  --cmd-truth-bg: rgba(45, 212, 191, 0.14);
+  --cmd-ops: #94a6c7;
+  --cmd-ops-bg: rgba(148, 166, 199, 0.14);
 }
 
 /* Future styles: use tokens above (add to both :root and [data-theme="light"]). Never hardcode theme colors. */
@@ -44,6 +50,12 @@
   --card-grad-1: rgba(0, 119, 182, 0.05);
   --card-grad-2: rgba(255, 255, 255, 0.92);
   --table-cell-bg: rgba(255, 255, 255, 0.75);
+  --cmd-cache: #6d28d9;
+  --cmd-cache-bg: rgba(109, 40, 217, 0.1);
+  --cmd-truth: #0f766e;
+  --cmd-truth-bg: rgba(13, 148, 136, 0.12);
+  --cmd-ops: #5a6d88;
+  --cmd-ops-bg: rgba(90, 109, 136, 0.1);
 }
 
 * {
@@ -259,6 +271,85 @@ hr {
   font-size: 0.98rem;
 }
 
+.cmd-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem 0.95rem;
+  margin: 0.8rem 0;
+}
+
+.cmd-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.cmd-badge {
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  border-radius: 999px;
+}
+
+.cmd-card--cache .cmd-badge {
+  color: var(--cmd-cache);
+  background: var(--cmd-cache-bg);
+}
+
+.cmd-card--truth .cmd-badge {
+  color: var(--cmd-truth);
+  background: var(--cmd-truth-bg);
+}
+
+.cmd-card--ops .cmd-badge {
+  color: var(--cmd-ops);
+  background: var(--cmd-ops-bg);
+}
+
+.cmd-card code {
+  display: block;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-strong);
+  background: var(--accent-soft);
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.cmd-card p {
+  margin: 0.55rem 0 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.cmd-card button {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  padding: 0.12rem 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cmd-card button:hover,
+.cmd-card button:focus-visible {
+  color: var(--text-strong);
+  border-color: var(--card-border-hover);
+  outline: none;
+}
+
 .content img {
   display: block;
   max-width: 100%;
@@ -266,6 +357,11 @@ hr {
   margin: 1.5rem auto 0.75rem;
   border-radius: 10px;
   border: 1px solid var(--border);
+}
+
+.content .media-row__img {
+  margin: 0;
+  max-width: 45%;
 }
 
 .media-row {
@@ -288,9 +384,12 @@ hr {
 }
 
 .media-row__img {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   width: 280px;
   max-width: 45%;
+  min-width: 0;
+  height: auto;
+  object-fit: contain;
   margin: 0;
 }
 
@@ -306,14 +405,38 @@ hr {
   margin: 1.5rem auto 0.75rem;
 }
 
+.dns-hierarchy {
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+  margin: 1.5rem auto 0.75rem;
+  color: var(--text-muted);
+  font-family: system-ui, "Segoe UI", sans-serif;
+}
+
+.dns-hierarchy .dns-h-foot-bg {
+  fill: var(--bg-elevated);
+  stroke: var(--border);
+}
+
+.dns-hierarchy .dns-h-foot-title {
+  fill: var(--text-strong);
+}
+
+.dns-hierarchy .dns-h-foot-body {
+  fill: var(--text-main);
+}
+
 .pipeline-diagram .row-label {
   fill: var(--text-muted);
 }
 
 .media-row__aside {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   width: 360px;
   max-width: 50%;
+  min-width: 0;
 }
 
 .media-row__aside table {

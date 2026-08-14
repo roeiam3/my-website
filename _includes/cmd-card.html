@@ -1,0 +1,8 @@
+<div class="cmd-card cmd-card--{{ include.variant | default: 'cache' }}">
+  <div class="cmd-head">
+    <span class="cmd-badge">{{ include.badge }}</span>
+    <button type="button" aria-label="Copy command" onclick="navigator.clipboard.writeText(this.closest('.cmd-card').querySelector('code').textContent)">copy</button>
+  </div>
+  <code>{{ include.cmd }}</code>
+  <p>{{ include.desc }}</p>
+</div>
