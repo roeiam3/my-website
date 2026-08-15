@@ -7,19 +7,19 @@ project: dns-untangled
 
 # Hierarchy, Domains & Zones
 
+Root does not forward your query to the TLD. Nothing is forwarded. The resolver makes every single query itself, and comes back to the middle after each one — twice holding nothing but a pointer.
 
-{% include dns-hierarchy.svg %}
+{% include dns-walk-down-tree.html %}
 
-- **Roots:** 13 named identities, 12 operators, ~1,900 anycast instances; every instance serves the ENTIRE root zone (~1,500 TLD delegations). Redundancy, not partitioning.
-- **TLDs:** same model; nearly pure referral machines.
-- **Authoritative servers:** hold the actual zone data. google.com's A record exists in exactly one place: Google's zone.
+
 
 ## Domain vs. Zone
 
-- **Domain** = a name + anything under it, such as www.Google.com
-- **Zone** = a file or a database that contains all records for a given administrative zone, it contains A records, AAA records, PTRs, CNAMEs etc..
+The example above illustrates the communication between the host and the resolver, what the resolver is responsible for, and how it interacts with every other component during normal DNS operation.
 
-
+- **Domain** — the SLD (second-level domain, e.g. `google`) plus the TLD (top-level domain, e.g. `.com`). In the example above `roeiam` is the SLD and `.online` is the TLD. Everything below `roeiam`, such as `blog.roeiam.online`, is part of the `roeiam.online` domain and is served the same way.
+- **Zone** — a file or a database that actually contains the resource records. `ns11`/`ns12` hold the resource records for `roeiam.online` in their zone, which is what makes them the authoritative source for the domain.
+- **A zone is not the server holding it** — the authoritative servers don't have to sit in the TLD they answer for. `ns11.domaincontrol.com` is under `.com`, yet it answers queries for a `.online` domain. A nameserver's own name is just a hostname that has to resolve; it carries no authority on its own. The only thing tying it to your zone is the NS record in the `.online` delegation naming it.
 
 ## Querying the right layer
 
@@ -28,25 +28,23 @@ Works for any record type — NS, A, MX, TXT. Same pattern, different targets, a
 {% include cmd-card.html
    variant="cache"
    badge="users' view"
-   cmd="dig www.example.com"
+   cmd="dig roeiam.online"
    desc="What do users currently see? Asks the configured resolver — cached if it has one." %}
 
 {% include cmd-card.html
    variant="cache"
    badge="one server"
-   cmd="dig @8.8.8.8 www.example.com"
+   cmd="dig @8.8.8.8 roeiam.online"
    desc="What does a specific server say? @ only changes the recipient." %}
 
 {% include cmd-card.html
    variant="truth"
    badge="ground truth"
-   cmd="dig @ns1.example.com www.example.com A +norecurse"
+   cmd="dig @ns11.domaincontrol.com roeiam.online A +norecurse"
    desc="What does the zone actually contain? Straight to the authoritative, every cache bypassed." %}
 
 {% include cmd-card.html
    variant="truth"
    badge="delegation chain"
-   cmd="dig +trace www.example.com"
+   cmd="dig +trace roeiam.online"
    desc="Is the delegation chain itself intact? Full walk from the root." %}
-
-
