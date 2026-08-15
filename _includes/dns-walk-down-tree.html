@@ -1,0 +1,82 @@
+<div class="dns-walk" tabindex="0" aria-label="Interactive DNS resolution walkthrough for roeiam.online">
+  <p class="dns-walk__target">You type <code>roeiam.online</code> into Chrome. Every query that follows, in order.</p>
+
+  <div class="dns-walk__stage">
+    <p class="dns-walk__scroll-hint">Scroll diagram →</p>
+    <div class="dns-walk__scroller">
+      <svg viewBox="0 0 940 470" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Resolver at center queries the root, the online TLD, and the roeiam.online authoritative servers in sequence.">
+        <path id="dns-walk-p-client" class="edge" d="M140,235 L232,235"/>
+        <path id="dns-walk-p-root" class="edge" d="M424,235 C512,235 530,80 620,80"/>
+        <path id="dns-walk-p-tld" class="edge" d="M424,235 L620,235"/>
+        <path id="dns-walk-p-auth" class="edge" d="M424,235 C512,235 530,390 620,390"/>
+        <text class="t-hop" id="dns-walk-lbl-root" x="522" y="140" text-anchor="middle">hop 1</text>
+        <text class="t-hop" id="dns-walk-lbl-tld" x="522" y="225" text-anchor="middle">hop 2</text>
+        <text class="t-hop" id="dns-walk-lbl-auth" x="522" y="333" text-anchor="middle">hop 3</text>
+        <g class="node" id="dns-walk-n-client" tabindex="0" role="button" aria-label="Step 1, Chrome asks its resolver">
+          <rect class="box" x="30" y="196" width="110" height="78" rx="9"/>
+          <text class="t-name" x="85" y="228" text-anchor="middle" font-size="15">Chrome</text>
+          <text class="t-note" x="85" y="248" text-anchor="middle">stub resolver</text>
+        </g>
+        <g class="node" id="dns-walk-n-resolver" tabindex="0" role="button" aria-label="The recursive resolver, which does all the work">
+          <rect class="box" x="232" y="160" width="192" height="150" rx="9"/>
+          <text class="t-role t-role--accent" x="328" y="192" text-anchor="middle">does the work</text>
+          <text class="t-name" x="328" y="222" text-anchor="middle">Resolver</text>
+          <text class="t-host" x="328" y="244" text-anchor="middle">recursive · caching</text>
+          <text class="t-note" x="328" y="272" text-anchor="middle">asks all three</text>
+          <text class="t-note" x="328" y="290" text-anchor="middle">servers itself</text>
+        </g>
+        <g class="node" id="dns-walk-n-root" tabindex="0" role="button" aria-label="Step 2, the root servers">
+          <rect class="box" x="620" y="32" width="292" height="96" rx="9"/>
+          <text class="t-role t-role--cache" x="640" y="56">referral only</text>
+          <text class="t-name" x="640" y="82">Root &nbsp;<tspan class="t-host" font-size="14">( . )</tspan></text>
+          <text class="t-host" x="640" y="102">a–m.root-servers.net</text>
+          <text class="t-note" x="640" y="120">knows every TLD, nothing below them</text>
+        </g>
+        <g class="node" id="dns-walk-n-tld" tabindex="0" role="button" aria-label="Step 3, the online TLD servers">
+          <rect class="box" x="620" y="187" width="292" height="96" rx="9"/>
+          <text class="t-role t-role--cache" x="640" y="211">referral only</text>
+          <text class="t-name" x="640" y="237">TLD &nbsp;<tspan class="t-host" font-size="14">( online )</tspan></text>
+          <text class="t-host" x="640" y="257">ns01.trs-dns.net · ns10.trs-dns.org</text>
+          <text class="t-note" x="640" y="275">knows the delegation, not the records</text>
+        </g>
+        <g class="node" id="dns-walk-n-auth" tabindex="0" role="button" aria-label="Step 4, the roeiam.online authoritative servers">
+          <rect class="box" x="620" y="342" width="292" height="96" rx="9"/>
+          <text class="t-role t-role--truth" x="640" y="366">authoritative</text>
+          <text class="t-name" x="640" y="392">roeiam.online</text>
+          <text class="t-host" x="640" y="412">ns11 · ns12.domaincontrol.com</text>
+          <text class="t-note" x="640" y="430">holds every record in the zone</text>
+        </g>
+        <g id="dns-walk-packet" opacity="0">
+          <circle r="7" fill="var(--accent)"/>
+          <circle r="13" fill="var(--accent)" opacity=".22"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="dns-walk__readout" id="dns-walk-readout" aria-live="polite" aria-atomic="true">
+      <div class="dns-walk__rline">
+        <span class="dns-walk__step" id="dns-walk-step-no">Step 0 of 4</span>
+        <span class="dns-walk__verdict v-idle" id="dns-walk-verdict">not started</span>
+      </div>
+      <pre class="dns-walk__cmd" id="dns-walk-cmd">Press Start — or click any server in the diagram</pre>
+      <dl class="dns-walk__meta">
+        <div class="dns-walk__cell dns-walk__cell--key"><dt>Answer</dt><dd id="dns-walk-m-an">—</dd></div>
+        <div class="dns-walk__cell"><dt>Authority</dt><dd id="dns-walk-m-au">—</dd></div>
+        <div class="dns-walk__cell"><dt>Additional</dt><dd id="dns-walk-m-ad">—</dd></div>
+        <div class="dns-walk__cell dns-walk__cell--key"><dt>Flags</dt><dd id="dns-walk-m-fl">—</dd></div>
+      </dl>
+      <p class="dns-walk__means" id="dns-walk-means">
+        Four queries, one answer. Step through to see which server actually hands
+        over an address — and how many only point somewhere else.
+      </p>
+      <p class="dns-walk__repro" id="dns-walk-repro"></p>
+    </div>
+  </div>
+
+  <div class="dns-walk__controls">
+    <button type="button" id="dns-walk-btn-prev" disabled>← Back</button>
+    <button type="button" id="dns-walk-btn-next" class="primary">Start →</button>
+    <button type="button" id="dns-walk-btn-play">Play all</button>
+  </div>
+</div>

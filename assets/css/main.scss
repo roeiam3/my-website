@@ -405,31 +405,322 @@ hr {
   margin: 1.5rem auto 0.75rem;
 }
 
-.dns-hierarchy {
+.pipeline-diagram .row-label {
+  fill: var(--text-muted);
+}
+
+.dns-walk {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.1rem 1.1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.dns-walk__target {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.dns-walk__target code {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.95em;
+  color: var(--accent);
+}
+
+.dns-walk__stage {
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dns-walk__scroller {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-color: var(--border) transparent;
+}
+
+.dns-walk__scroll-hint {
+  display: none;
+  margin: 0;
+  padding: 0.45rem 0.75rem 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+}
+
+.dns-walk__scroller svg {
   display: block;
   width: 100%;
-  max-width: 680px;
+  min-width: 660px;
   height: auto;
-  margin: 1.5rem auto 0.75rem;
-  color: var(--text-muted);
-  font-family: system-ui, "Segoe UI", sans-serif;
 }
 
-.dns-hierarchy .dns-h-foot-bg {
+.dns-walk .box {
   fill: var(--bg-elevated);
   stroke: var(--border);
+  stroke-width: 1.5;
+  transition: stroke 0.18s ease, stroke-width 0.18s ease;
 }
 
-.dns-hierarchy .dns-h-foot-title {
-  fill: var(--text-strong);
+.dns-walk .edge {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
 }
 
-.dns-hierarchy .dns-h-foot-body {
+.dns-walk .edge.on {
+  stroke-dasharray: none;
+  stroke-width: 2;
+}
+
+.dns-walk text {
   fill: var(--text-main);
 }
 
-.pipeline-diagram .row-label {
+.dns-walk .t-name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.dns-walk .t-host {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
   fill: var(--text-muted);
+}
+
+.dns-walk .t-note {
+  font-size: 12.5px;
+  fill: var(--text-muted);
+}
+
+.dns-walk .t-role {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dns-walk .t-role--cache { fill: var(--cmd-cache); }
+.dns-walk .t-role--truth { fill: var(--cmd-truth); }
+.dns-walk .t-role--accent { fill: var(--accent); }
+
+.dns-walk .t-hop {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--text-muted);
+}
+
+.dns-walk .node {
+  cursor: pointer;
+}
+
+.dns-walk .node:hover .box,
+.dns-walk .node:focus-visible .box {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.dns-walk .node:focus { outline: none; }
+
+.dns-walk .dim {
+  opacity: 0.42;
+  transition: opacity 0.3s ease;
+}
+
+.dns-walk__readout {
+  border-top: 1px solid var(--border);
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.dns-walk__rline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.85rem;
+  margin: 0 0 0.75rem;
+}
+
+.dns-walk__step {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dns-walk__verdict {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+}
+
+.dns-walk .v-ref { color: var(--cmd-cache); }
+.dns-walk .v-ans { color: var(--cmd-truth); }
+.dns-walk .v-idle { color: var(--text-muted); }
+
+.dns-walk__cmd {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  margin: 0 0 0.85rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--text-strong);
+}
+
+.dns-walk__cmd .who {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.dns-walk__repro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0.85rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--border);
+}
+
+.dns-walk__repro span {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dns-walk__repro code {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.dns-walk__meta {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 0 0.85rem;
+}
+
+.dns-walk__cell {
+  background: var(--bg-elevated);
+  padding: 0.55rem 0.65rem;
+}
+
+.dns-walk__cell--key {
+  background: var(--accent-soft);
+}
+
+.dns-walk__cell dt {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.25rem;
+}
+
+.dns-walk__cell dd {
+  margin: 0;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.dns-walk__means {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 66ch;
+}
+
+.dns-walk__means b {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.dns-walk__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.dns-walk button {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.dns-walk button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.dns-walk button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.dns-walk button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.dns-walk button.primary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .dns-walk__scroll-hint { display: block; }
+  .dns-walk__meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dns-walk * {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .media-row__aside {

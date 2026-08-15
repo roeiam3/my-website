@@ -88,6 +88,9 @@
         {% include section-nav.html %}
         <script src="{{ '/assets/js/section-nav.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
       {% endif %}
+      {% if page.project == 'dns-untangled' %}
+        <script src="{{ '/assets/js/dns-walk-tree.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+      {% endif %}
     </main>
   </div>
   <script src="{{ '/assets/js/theme.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
