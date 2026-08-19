@@ -12,7 +12,7 @@ project: dns-untangled
 | Role | What it does | Example |
 |---|---|---|
 | **Stub resolver** | Client-side; asks one configured resolver, waits. Zero legwork | OS built-in (systemd-resolved, Windows DNS Client) |
-| **Recursive resolver** | Walks the hierarchy, caches, returns final answers | Enterprise BIND, ISP resolver, 1.1.1.1 |
+| **Recursive resolver** | Walks the hierarchy, caches, returns final answers | Enterprise BIND, ISP resolver |
 | **Forwarder** | Relays to a real resolver upstream; caches; no tree-walking | Home gateway, branch DNS |
 | **Authoritative** | Answers only from its own zones: answer / referral / NXDOMAIN. Never goes looking | Roots, TLDs, a domain's NS |
 
@@ -29,10 +29,10 @@ project: dns-untangled
 ## Lifecycle (nothing cached)
 
 ```
-stub → resolver:            "A for app.example.com?" (RD=1)
-resolver → root:            referral: ".com is delegated to these servers"
-resolver → .com TLD:        referral: "example.com → ns1/ns2.exampledns.net"
-resolver → ns1:             ANSWER (aa): app.example.com A 203.0.113.10, TTL 300
+stub → resolver:            "A for blog.roeiam.online?" (RD=1)
+resolver → root:            referral: ".online is delegated to these servers"
+resolver → .online TLD:     referral: "roeiam.online → ns11/ns12.domaincontrol.com"
+resolver → ns11:            ANSWER (aa): roeiam.online A …, TTL …
 resolver → stub:            the IP (cached for next time)
 ```
 
@@ -46,20 +46,20 @@ resolver → stub:            the IP (cached for next time)
 | yes | 1 | full recursive lookup |
 | yes | 0 | **cache-only answer** (cache-inspection trick) |
 | no | 1 | own-data/referral anyway; RD ignored |
-| no | 0 | own-data only — ground truth, belt and suspenders |
+| no | 0 | own-data only — ground truth |
 
-## THE troubleshooting move
+## First move on a wrong-answer ticket
 
 {% include cmd-card.html
    variant="cache"
    badge="users' view"
-   cmd="dig www.example.com +short"
-   desc="What users currently see — the resolver's cached answer." %}
+   cmd="dig roeiam.online +short"
+   desc="What the resolver your machine uses is serving right now — cache included." %}
 
 {% include cmd-card.html
    variant="truth"
    badge="ground truth"
-   cmd="dig @ns1.example.com www.example.com +short +norecurse"
-   desc="What the zone actually contains. Straight to the authoritative, every cache bypassed." %}
+   cmd="dig @ns11.domaincontrol.com roeiam.online +short +norecurse"
+   desc="What the zone actually contains. Every cache layer bypassed." %}
 
-Disagree → stale caches (TTL problem): wait or flush. Agree but wrong → the zone data is wrong: fix the record. One pair of commands halves the problem space.
+Disagree → stale cache / TTL: wait or flush. Agree but wrong → zone data: fix the record. Two commands, two buckets.

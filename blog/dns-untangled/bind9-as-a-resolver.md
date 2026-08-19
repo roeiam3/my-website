@@ -17,8 +17,7 @@ Cisco GW (GW-INTERNET)
  └─ VLAN 20: 192.168.20.0/24 — Linux client = 192.168.20.1
 ```
 
-DHCP pools on the GW; pools must hand out `dns-server 192.168.10.1` (VLAN-10 pool initially handed out 8.8.8.8 — found & fixed).
-
+DHCP pools on the GW; pools must hand out `dns-server 192.168.10.1` 
 ## Naming: bind9 vs named
 
 - **BIND** = the software project; **bind9** = the apt package; **named** = the actual daemon/service.
@@ -53,12 +52,12 @@ Why: otherwise every plain `dig` on the server tests resolved, not BIND, and the
 
 ### 2. Config anatomy — `/etc/bind/`
 
-| File | Job | Edited |
-|---|---|---|
-| named.conf | includes the others | never |
-| **named.conf.options** | global: listen, recursion, ACLs — the **resolver hat** | B1 ✓ |
-| **named.conf.local** | zones — the **authoritative hat** | B2 |
-| named.conf.default-zones | localhost zones + **root hints** (`zone "." type hint` — how BIND bootstraps the tree) | never |
+| File | Job |
+|---|---|
+| named.conf | includes the others |
+| **named.conf.options** | global: listen, recursion, ACLs — the **resolver hat** |
+| **named.conf.local** | zones — the **authoritative hat** |
+| named.conf.default-zones | localhost zones + **root hints** (`zone "." type hint` — how BIND bootstraps the tree) |
 
 The two hats from the lifecycle model are literally two config files on one box.
 
