@@ -11,7 +11,7 @@ project: dns-untangled
 
 A record's TTL is set once, in the zone. From then on:
 
-- The **authoritative** always serves the full original value (static — never counts down). Verified in lab: two direct queries 69s apart, both TTL 86400.
+- The **authoritative** always serves the full original value (static — never counts down)
 - Every **cache** starts a private countdown from the moment IT fetched, serves the remainder, discards at zero, refetches on next demand.
 
 No pushes, no sync — just independent egg timers everywhere, each started at a different moment.
@@ -52,13 +52,13 @@ Record with TTL 86400 must move Friday 18:00:
 {% include cmd-card.html
    variant="truth"
    badge="ground truth"
-   cmd="dig @ns1.example.com www.example.com +norecurse"
+   cmd="dig @ns11.domaincontrol.com roeiam.online +norecurse"
    desc="Authoritative answer — what the zone contains right now." %}
 
 {% include cmd-card.html
    variant="cache"
    badge="cache view"
-   cmd="dig @1.1.1.1 www.example.com"
+   cmd="dig @1.1.1.1 roeiam.online"
    desc="What a public resolver still holds. Plain dig is the same idea against your local resolver." %}
 4. **Keep the old server alive** through the window — mid-session users and TTL-violating caches still hit it.
 5. **T+1d: restore the normal TTL.**
@@ -83,4 +83,4 @@ slashdot.org. 180 IN SOA ns11.constellix.com. dns.constellix.com. 2015010589 432
 - **MINIMUM** (+ the SOA's own TTL; lower wins) — **negative-caching TTL**: how long resolvers cache NXDOMAIN/NODATA for this zone. This is why "I just created the record and it still says NXDOMAIN" happens — the *absence* was cached before the record existed.
 - REFRESH/RETRY: secondary check-in cadence. Park until primary/secondary session.
 
-One-sentence takeaway: **SOA = version number for replication + the "how long to cache a NO" timer.** Negative answers carry the SOA in AUTHORITY because "nothing" has no record of its own to carry a TTL.
+

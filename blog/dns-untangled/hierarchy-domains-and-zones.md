@@ -15,15 +15,17 @@ Root does not forward your query to the TLD. Nothing is forwarded. The resolver 
 
 ## Domain vs. Zone
 
-The example above illustrates the communication between the host and the resolver, what the resolver is responsible for, and how it interacts with every other component during normal DNS operation.
+You just watched root and `com` return ANSWER 0 — not because they were hiding the address, but because `www.google.com` isn't in their zones. A zone ends where a delegation begins. Google's nameservers had the A record because **google.com** is their zone; on this site the same role is `roeiam.online` on `ns11`/`ns12`.
 
-- **Domain** — the SLD (second-level domain, e.g. `google`) plus the TLD (top-level domain, e.g. `.com`). In the example above `roeiam` is the SLD and `.online` is the TLD. Everything below `roeiam`, such as `blog.roeiam.online`, is part of the `roeiam.online` domain and is served the same way.
-- **Zone** — a file or a database that actually contains the resource records. `ns11`/`ns12` hold the resource records for `roeiam.online` in their zone, which is what makes them the authoritative source for the domain.
-- **A zone is not the server holding it** — the authoritative servers don't have to sit in the TLD they answer for. `ns11.domaincontrol.com` is under `.com`, yet it answers queries for a `.online` domain. A nameserver's own name is just a hostname that has to resolve; it carries no authority on its own. The only thing tying it to your zone is the NS record in the `.online` delegation naming it.
+- **Domain** — what you register and everything under it. `roeiam` + `.online`; `blog.roeiam.online` is still part of that domain.
+- **Zone** — the records a specific server set owns. File in BIND, table in Infoblox, partition in AD. Authority lives here, not in the registrar's marketing copy.
+- **Server ≠ zone** — `ns11.domaincontrol.com` is a hostname under `.com` that answers for `.online`. The NS record in the `.online` delegation is what ties it to your zone; the hostname alone carries no authority.
+
+Ticket pattern: "record exists in the console but doesn't resolve" → edited in the **parent** zone while the world gets referred to the **child** nameservers. Ask: which zone answers this name, and which zone did you touch?
 
 ## Querying the right layer
 
-Works for any record type — NS, A, MX, TXT. Same pattern, different targets, answers different questions: what do users currently see vs. what does a specific server say vs. what does the zone actually contain vs. is the delegation chain itself intact. Most tickets are solved by comparing two of these.
+Same four questions for any record type — NS, A, MX, TXT. Most tickets: compare two of these and you're done.
 
 {% include cmd-card.html
    variant="cache"
